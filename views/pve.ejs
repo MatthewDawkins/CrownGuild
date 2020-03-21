@@ -1,0 +1,131 @@
+<%- include("header") -%>
+
+
+<div class="header">
+  <img class="background-img pve" src="images/BRM.jpg" alt="">
+  <h1 class="pve-headings">World Class Guild</h1>
+  <div class="row guild-images">
+    <div class="col-lg-6">
+      <h3>Competitive World Rankings</h3>
+      <img src="images/crownrank.png" class="rank-img">
+    </div>
+    <div class="col-lg-6">
+      <h3>Top Tier Parsing</h3>
+      <img src="images/crownparse.png" class="parse-img">
+    </div>
+  </div>
+  <h1 class="pve-headings">World Class Players</h1>
+  <div class="row parse-tables">
+    <div class="col-lg-6 iuxbp-parse-table">
+      <div class="">
+        <table class="parse-data table table-light">
+          <h3 style="text-decoration: underline;">Iuxbp</h3>
+          <thead>
+            <tr>
+              <th>Boss</th>
+              <th>Rank</th>
+              <th>Percentile</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>Razorgore the Untamed</td>
+            <td><%= recordRazorgoreRank%></td>
+            <td><%= recordRazorgorePercentile%></td>
+          </tr>
+          <tr>
+            <td>Vaelastrasz the Corrupt</td>
+            <td><%=recordVaelRank %></td>
+            <td><%=recordVaelPercentile %></td>
+          </tr>
+          <tr>
+            <td>Broodlord Lashlayer</td>
+            <td><%=recordBroodlordRank %></td>
+            <td><%=recordBroodlordPercentile %></td>
+          </tr>
+          <tr>
+            <td>Firemaw</td>
+            <td><%=recordFiremawRank %></td>
+            <td><%=recordFiremawPercentile %></td>
+          </tr>
+          <tr>
+            <td>Ebonroc</td>
+            <td><%=recordEbonrocRank %></td>
+            <td><%=recordEbonrocPercentile %></td>
+          </tr>
+          <tr>
+            <td>Flamegor</td>
+            <td><%=recordFlamegorRank %></td>
+            <td><%=recordFlamegorPercentile %></td>
+          </tr>
+          <tr>
+            <td>Chromaggus</td>
+            <td><%=recordChromaggusRank %></td>
+            <td><%=recordChromaggusPercentile %></td>
+          </tr>
+          <tr>
+            <td>Nefarian</td>
+            <td><%=recordNefRank %></td>
+            <td><%=recordNefPercentile %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-6 iuxbp-parse-table">
+      <div class="">
+        <table class="parse-data table table-light">
+          <h3 style="text-decoration: underline;">Robdog</h3>
+          <thead>
+            <tr>
+              <th>Boss</th>
+              <th>Rank</th>
+              <th>Percentile</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>Razorgore the Untamed</td>
+            <td><%= recordRazorgoreRank%></td>
+            <td><%= recordRazorgorePercentile%></td>
+          </tr>
+          <tr>
+            <td>Vaelastrasz the Corrupt</td>
+            <td><%=recordVaelRank %></td>
+            <td><%=recordVaelPercentile %></td>
+          </tr>
+          <tr>
+            <td>Broodlord Lashlayer</td>
+            <td><%=recordBroodlordRank %></td>
+            <td><%=recordBroodlordPercentile %></td>
+          </tr>
+          <tr>
+            <td>Firemaw</td>
+            <td><%=recordFiremawRank %></td>
+            <td><%=recordFiremawPercentile %></td>
+          </tr>
+          <tr>
+            <td>Ebonroc</td>
+            <td><%=recordEbonrocRank %></td>
+            <td><%=recordEbonrocPercentile %></td>
+          </tr>
+          <tr>
+            <td>Flamegor</td>
+            <td><%=recordFlamegorRank %></td>
+            <td><%=recordFlamegorPercentile %></td>
+          </tr>
+          <tr>
+            <td>Chromaggus</td>
+            <td><%=recordChromaggusRank %></td>
+            <td><%=recordChromaggusPercentile %></td>
+          </tr>
+          <tr>
+            <td>Nefarian</td>
+            <td><%=recordNefRank %></td>
+            <td><%=recordNefPercentile %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%- include("footer") -%>

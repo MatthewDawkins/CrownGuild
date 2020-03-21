@@ -1,0 +1,182 @@
+body {
+  background-color: #000000;
+  text-align: center;
+  font-family: 'Dosis', sans-serif;
+  text-transform: uppercase;
+}
+
+hr {
+  margin: auto;
+  color: #fff;
+  border: 1px solid;
+}
+
+h3 {
+  color: #ededed;
+  padding-bottom: 3%;
+}
+
+/* NAVBAR  */
+
+.navigation-bar-button {
+  padding: 0 5%;
+}
+
+.logo-icon:hover {
+  color: #fff;
+}
+
+/* homepage */
+
+#homepage {
+  text-align: center;
+  color: #fff;
+}
+
+.guild-name-container {
+  padding-top: 12%;
+  letter-spacing: 0.2em;
+}
+
+.guild-slogan-container {
+  padding: 2% 0;
+}
+
+.join-now-button {
+  padding: 1% 0%;
+}
+
+.header {
+  width: 99vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  position: relative;
+}
+
+.background-img {
+  z-index: -1;
+  filter: blur(4px) grayscale(100%);
+  opacity: 0.6;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
+/* JOIN NOW SECTION */
+
+#join {
+  padding: 8% 15%;
+  color: white;
+  text-align: center;
+}
+
+.signup-join {
+  background-color: transparent;
+  border: none;
+}
+
+.login-label {
+  color: #ededed;
+}
+
+.social-block {
+  color: #ededed;
+  margin-top: 40%;
+}
+
+/* SOCIALS SECTION */
+
+#socials {
+  text-align: center;
+}
+
+.social-media {
+  padding-top: 7%;
+  padding-bottom: .01%;
+}
+
+.social-media-icon {
+  margin: 3%;
+  color: white;
+}
+
+.social-media-icon:hover {
+  color: #ededed;
+  opacity: 0.3;
+}
+
+.credit {
+  color: white;
+  padding: 12% 10% 1%;
+}
+
+/* PVP SECTION */
+
+#pvp-carousel {
+  padding: 10% 0 0;
+}
+
+.pvp-slogan {
+  margin-bottom: 5%;
+  color: #ededed;
+}
+
+.row {
+  max-width: 100%;
+}
+
+.carousel-control-next, .carousel-control-prev {
+  width: 3%;
+}
+
+
+/* PVE SECTION */
+
+tr {
+  border: 1px solid #ededed;
+}
+
+.pve {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.parse-data {
+  background-color: transparent;
+  color: #ededed;
+}
+
+.iuxbp-parse-table {
+  color: #ededed;
+}
+
+.parse-tables {
+  position: relative;
+  left: 1%;
+  top: 7%;
+}
+
+.parse-img {
+  opacity: 0.5;
+  width: 85%;
+}
+
+.rank-img {
+  opacity: 0.5;
+
+}
+
+.pve-headings {
+  color: #ededed;
+  position: relative;
+  top: 7%;
+}
+
+.guild-images {
+  position: relative;
+  top: 7%;
+}
