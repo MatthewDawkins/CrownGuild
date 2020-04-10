@@ -133,8 +133,13 @@ app.get("/auth/google/crown",
 
 
 app.get('/', function(req, res){
-  res.render("homepage")
+    res.render("homepage");
 });
+
+app.get('/home', function(req, res){
+    res.render("home", {user: User.username});
+});
+
 
 app.get('/pvp', function(req, res){
   res.render("pvp");
@@ -351,12 +356,11 @@ app.post("/login", function(req, res) {
       console.log(err);
     } else {
       passport.authenticate("local")(req, res, function() {
-        res.redirect("/");
+        res.redirect("/home");
       });
     }
   });
 });
-
 
 
 app.listen(3000, function() {
