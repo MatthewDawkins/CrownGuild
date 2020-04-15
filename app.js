@@ -133,7 +133,7 @@ app.get("/auth/google/crown",
 
 
 app.get('/', function(req, res){
-  res.render("homepage", {currentUser: req.user});
+  res.render("home", {currentUser: req.user});
 });
 
 
@@ -369,7 +369,6 @@ app.post("/login", function(req, res) {
     }
   });
 });
-
 
 
 app.listen(3000, function() {
