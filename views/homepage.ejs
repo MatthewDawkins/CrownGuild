@@ -12,7 +12,13 @@
         <h5>Classic WoW Guild</h5>
       </div>
       <div class="join-now-button">
-        <a href="#join" class="btn btn-outline-light">Join Now</a>
+     <% if (!currentUser) { %>
+           <a href="#join" class="btn btn-outline-light">Join Now</a>
+
+    <%  } else { %>
+           <h1>Welcome <%=currentUser.username%></h1>
+    <%  } %>
+
       </div>
       <img class="background-img" src="images/wsg.jpg" alt="">
     </div>

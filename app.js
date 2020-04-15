@@ -133,8 +133,21 @@ app.get("/auth/google/crown",
 
 
 app.get('/', function(req, res){
-  res.render("homepage")
+  res.render("homepage", {currentUser: req.user});
 });
+
+
+app.get("/logout", function(req, res){
+  req.session.destroy(function(err){
+      if(err){
+          console.log(err);
+        } else {
+          res.redirect("/");
+        }
+      })
+});
+
+
 
 app.get('/pvp', function(req, res){
   res.render("pvp");
