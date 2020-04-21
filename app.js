@@ -181,12 +181,6 @@ Post.find({}, function (err, foundPosts){
 });
 
 
-
-
-
-
-
-
 app.post("/forums", function(req, res) {
 
 console.log(req.user);
@@ -210,9 +204,6 @@ console.log(req.user);
     });
   res.redirect("/forums")
 });
-
-
-
 
 
 app.get("/post/:title", function(req, res) {
@@ -253,7 +244,7 @@ app.get("/post/:title", function(req, res) {
 
 
 app.get('/pvp', function(req, res){
-  res.render("pvp");
+  res.render("pvp", {currentUser: req.user});
 });
 
 app.get('/pve', function(req, res){
@@ -432,6 +423,7 @@ app.get('/pve', function(req, res){
         recordChromaggusPercentile: recordChromaggusPercentile,
         recordNefRank: recordNefRank,
         recordNefPercentile: recordNefPercentile,
+        currentUser: req.user
       });
     });
   });

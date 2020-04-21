@@ -185,10 +185,28 @@ tr {
 
 .composeForm {
   position: relative;
-  top: 40rem;
 }
 
 .forum {
   color: #fff;
   position: relative;
+  padding: 0 3% 3% 0;
+  border-right: solid 1px #fff;
+  border-bottom: solid 1px #fff;
+  border-top: solid 1px #fff;
+  padding-left: 2%;
+}
+
+.forum-post {
+  text-align: left;
+  padding: 10% 3% 3% 0;
+}
+
+.username {
+  float: left;
+  border: solid 1px #fff;
+}
+
+.title {
+  left: 2%;
 }
