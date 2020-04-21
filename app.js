@@ -113,18 +113,18 @@ app.get("/auth/google/crown",
     res.redirect('/');
   });
 
-  app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook'));
 
-  app.get('/auth/facebook/crown',
+app.get('/auth/facebook/crown',
     passport.authenticate('facebook', {
       successRedirect: '/',
       failureRedirect: '/'
     }));
 
-    app.get('/auth/twitter',
+app.get('/auth/twitter',
     passport.authenticate('twitter'));
 
-    app.get('/auth/twitter/crown',
+app.get('/auth/twitter/crown',
     passport.authenticate('twitter', { failureRedirect: '/' }),
     function(req, res) {
       // Successful authentication, redirect home.
@@ -146,6 +146,109 @@ app.get("/logout", function(req, res){
         }
       })
 });
+
+
+
+const forumsSchema = new mongoose.Schema({
+  username: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  date: Date,
+  title: String,
+  body: String,
+  comments: [{ body: String, date: Date }],
+  date: { type: Date, default: Date.now },
+  meta: {
+    upVotes: Number,
+    downVotes:  Number
+    }
+  });
+
+const Post = new mongoose.model("Post", forumsSchema);
+
+
+app.get("/forums", function(req, res){
+
+Post.find({}, function (err, foundPosts){
+  if (err) {
+    console.log(err);
+  } else {
+    res.render("forums", {currentUser: req.user, foundPosts: foundPosts});
+  }
+}).populate("username");
+
+});
+
+
+
+
+
+
+
+
+app.post("/forums", function(req, res) {
+
+console.log(req.user);
+
+  const postUsername = req.user.id
+  const postTitle = req.body.postTitle
+  const postBody = req.body.postBody
+
+  const post = new Post({
+    username: postUsername,
+    title: postTitle,
+    body: postBody
+  });
+  Post.insertMany(post, function(err){
+    if (err){
+      console.log(err);
+    } else {
+      post.save();
+      console.log("Suceessfully inserted into the DB!")
+    }
+    });
+  res.redirect("/forums")
+});
+
+
+
+
+
+app.get("/post/:title", function(req, res) {
+  const postBody = req.body.postBody
+  const {title} = req.params
+
+
+  console.log(postBody);
+
+
+
+
+  Post.findOne({title: title}, function(err, foundPost){
+    if (!err){
+      if (!foundPost){
+        const post = new Post({
+          title: customPostName,
+          body: postBody
+      });
+
+      post.save();
+      } else {
+        res.render("")
+      }
+    }
+  })
+
+
+
+
+
+
+
+
+});
+
 
 
 

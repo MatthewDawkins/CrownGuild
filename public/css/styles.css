@@ -180,3 +180,15 @@ tr {
   position: relative;
   top: 7%;
 }
+
+/* FORUM SECTION */
+
+.composeForm {
+  position: relative;
+  top: 40rem;
+}
+
+.forum {
+  color: #fff;
+  position: relative;
+}

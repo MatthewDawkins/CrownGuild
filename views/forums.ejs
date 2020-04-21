@@ -1,0 +1,39 @@
+
+<%- include("header"); -%>
+
+
+
+
+<% if (foundPosts && foundPosts.length>0) { %>
+  <% foundPosts.forEach(post => { %>
+    <% const {username, title, body} = post %>
+    <div class="container">
+      <div class="forum username">
+       <i><%=username.username%></i>
+       </div>
+       <div class="forum title">
+      <%=title%>
+       </div>
+       <div class="forum body">
+       <%=body%>
+       </div>
+    </div>
+    <% }); %>
+<% }; %>
+
+  <img class="background-img pve" src="images/BRM.jpg" alt="">
+  <form class="composeForm" action="/forums" method="post">
+  <label>Title</label>
+  <input type="text" name="postTitle">
+  <label>Post</label>
+  <textarea name="postBody" rows="5" cols="30"></textarea>
+  <button type="submit" name="button">Publish</button>
+</form>
+
+
+
+
+
+
+
+<%- include("footer"); -%>
