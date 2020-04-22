@@ -183,8 +183,16 @@ tr {
 
 /* FORUM SECTION */
 
+#forums {
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
 .composeForm {
   position: relative;
+  border-left: solid 1px #fff;
+  width: 102%;
 }
 
 .forum {
@@ -200,6 +208,11 @@ tr {
 .forum-post {
   text-align: left;
   padding: 10% 3% 3% 0;
+
+}
+
+.abc {
+  text-align: center;
 }
 
 .username {

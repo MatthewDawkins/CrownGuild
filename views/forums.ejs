@@ -2,27 +2,38 @@
 <%- include("header"); -%>
 
 
+<section id="forums">
 
   <div class="container forum-post">
   <% if (foundPosts && foundPosts.length>0) { %>
     <% foundPosts.forEach(post => { %>
       <% const {username, title, body} = post %>
         <div class="forum username">
-         <i><%=username.username%></i>
-         </div>
+          <i><%=username.username%></i>
+        </div>
          <div class="forum title">
            <%=title%>
          </div>
       <% }); %>
   <% }; %>
-  <form class="composeForm forum" action="/forums" method="post">
-    <label>Title</label>
-    <input type="text" name="postTitle">
-    <label>Text</label>
-    <textarea name="postBody" rows="5" cols="30" placeholder="Compose your post."></textarea>
-    <button type="submit" name="button">Create Post</button>
-  </form>
+    <form class="composeForm forum" action="/forums" method="post">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Title</label>
+        <input type="text" minlength="5" maxlength="100" class="form-control" id="exampleFormControlInput1" name="postTitle">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Text</label>
+        <textarea minlength="50" maxlength="2000" class="form-control" rows="3" name="postBody" placeholder="Compose your post."></textarea>
+      </div>
+      <div class="form-group">
+        <button class="abc btn btn-outline-light" type="submit" name="button">Create Post</button>
+      </div>
+    </form>
   </div>
+  <div>
+    <img class="background-img" src="images/classicrag.jpg" alt="">
+  </div>
+</section>
 
 
 

@@ -171,10 +171,10 @@ const Post = new mongoose.model("Post", forumsSchema);
 app.get("/forums", function(req, res){
 
 Post.find({}, function (err, foundPosts){
-  if (err) {
-    console.log(err);
-  } else {
+  if (req.isAuthenticated()) {
     res.render("forums", {currentUser: req.user, foundPosts: foundPosts});
+  } else {
+    res.redirect("/#join")
   }
 }).populate("username");
 
@@ -182,8 +182,6 @@ Post.find({}, function (err, foundPosts){
 
 
 app.post("/forums", function(req, res) {
-
-console.log(req.user);
 
   const postUsername = req.user.id
   const postTitle = req.body.postTitle
