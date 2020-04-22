@@ -192,6 +192,8 @@ tr {
 
 .composeForm {
   position: relative;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
   border-left: solid 1px #fff;
   width: 102%;
 }
@@ -204,21 +206,21 @@ tr {
   border-bottom: solid 1px #fff;
   border-top: solid 1px #fff;
   padding-left: 2%;
+
+
 }
 
 .forum-post {
   text-align: left;
   padding: 10% 3% 3% 0;
-
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 75c346356b4181f3a9276300f8f9f5cecd9b3eba
 .username {
   float: left;
   border: solid 1px #fff;
+  width: 18%;
+  text-align: center;
 }
 
 .title {

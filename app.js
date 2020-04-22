@@ -174,7 +174,7 @@ app.get("/forums", function(req, res){
 
 Post.find({}, function (err, foundPosts){
   if (req.isAuthenticated()) {
-    res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year});
+    res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postBody: req.body.postTitle});
   } else {
     res.redirect("/#join")
   }
