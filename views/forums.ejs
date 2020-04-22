@@ -12,21 +12,25 @@
           <i><%=username.username%></i>
         </div>
          <div class="forum title">
-           <%=title%>
+          <% if (title.length > 80 ){ %>
+           <%= title.substring(0, 81) %>...
+      <%   } else { %>
+           <%= title %>
+      <%   }  %>
          </div>
       <% }); %>
   <% }; %>
     <form class="composeForm forum" action="/forums" method="post">
       <div class="form-group">
-        <label for="exampleFormControlInput1">Title</label>
-        <input type="text" minlength="5" maxlength="100" class="form-control" id="exampleFormControlInput1" name="postTitle">
+        <label>Title</label>
+        <input type="text" minlength="5" maxlength="200" class="form-control" name="postTitle" placeholder="Add a title.">
       </div>
       <div class="form-group">
-        <label for="exampleFormControlTextarea1">Text</label>
-        <textarea minlength="20" maxlength="2000" class="form-control" rows="3" name="postBody" placeholder="Compose your post."></textarea>
+        <label>Text</label>
+        <textarea minlength="20" maxlength="2000" class="form-control" rows="5" name="postBody" placeholder="Compose your post."></textarea>
       </div>
       <div class="form-group">
-        <button class="abc btn btn-outline-light" type="submit" name="button">Create Post</button>
+        <button class="btn btn-outline-light" type="submit" name="button">Create Post</button>
       </div>
     </form>
   </div>
@@ -35,13 +39,6 @@
   </div>
   <p class="credit">Crown © <%= year %></p>
 </section>
-
-
-
-
-
-
-
 
 
 

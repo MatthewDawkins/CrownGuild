@@ -199,7 +199,6 @@ app.post("/forums", function(req, res) {
       console.log(err);
     } else {
       post.save();
-      console.log("Suceessfully inserted into the DB!")
     }
     });
   res.redirect("/forums")
