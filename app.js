@@ -131,9 +131,11 @@ app.get('/auth/twitter/crown',
       res.redirect('/');
     });
 
+const d = new Date();
+const year = d.getFullYear();
 
 app.get('/', function(req, res){
-  res.render("home", {currentUser: req.user});
+  res.render("home", {currentUser: req.user, year: year});
 });
 
 
@@ -172,7 +174,7 @@ app.get("/forums", function(req, res){
 
 Post.find({}, function (err, foundPosts){
   if (req.isAuthenticated()) {
-    res.render("forums", {currentUser: req.user, foundPosts: foundPosts});
+    res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year});
   } else {
     res.redirect("/#join")
   }
@@ -242,7 +244,7 @@ app.get("/post/:title", function(req, res) {
 
 
 app.get('/pvp', function(req, res){
-  res.render("pvp", {currentUser: req.user});
+  res.render("pvp", {currentUser: req.user, year: year});
 });
 
 app.get('/pve', function(req, res){
