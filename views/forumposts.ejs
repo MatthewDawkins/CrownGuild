@@ -1,11 +1,41 @@
 <%- include("header") -%>
 
-<% const {title, body, date} = foundPosts %>
+<% const {title, body, _id, date, username} = foundPost %>
 
-<h1>Title</h1>
-<h3><%=title%></h3>
-<h1>Body</h1>
-<p><%=body%></p>
-<p><%=date%></p>
+
+<section id="forumPost">
+<div class="container forum-post">
+  <div class="forum username">
+    <i><%=username.username%><i>
+  </div>
+  <div class="forum title">
+    <h3><%=title%></h3>
+  </div>
+  <div>
+  <p><%=body%></p>
+  </div>
+<form class="composeForm forum" action="/forums" method="post">
+  <div class="form-group">
+    <label>Comment</label>
+    <textarea minlength="20" maxlength="2000" class="form-control" rows="5" name="postComment" placeholder="Compose your comment." required></textarea>
+  </div>
+  <div class="form-group">
+    <button class="forum-button btn btn-outline-light" type="submit" name="button">Create Comment</button>
+  </div>
+</form>
+</div>
+<div>
+<img class="background-img" src="images/classicrag.jpg" alt="">
+</div>
+<p class="credit">Crown © <%= year %></p>
+
+</section>
+
+
+
+
+
+
+
 
 <%- include("footer") -%>
