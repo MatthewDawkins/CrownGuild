@@ -16,9 +16,9 @@
     </div>
 
       <div class="forum title">
-        <a href=<%= "/forums/" + _id + "/"%>>
+        <a class="title" href=<%= "/forums/" + _id + "/"%>>
           <% if (title.length > 70 ){ %>
-          (<%= title.substring(0, 71) %>...
+          <%= title.substring(0, 71) %>...
           <%  } else { %>
           <%= title %>
           <%  }  %>

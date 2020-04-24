@@ -191,23 +191,16 @@ tr {
 }
 
 .composeForm {
-  position: relative;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
-  border-left: solid 1px #fff;
-  width: 102%;
 }
 
 .forum {
   color: #fff;
   position: relative;
   padding: 0 3% 3% 0;
-  border-right: solid 1px #fff;
-  border-bottom: solid 1px #fff;
-  border-top: solid 1px #fff;
+  border: solid 1px #fff;
   padding-left: 2%;
-
-
 }
 
 .forum-post {
@@ -218,12 +211,36 @@ tr {
 
 .username {
   float: left;
-  border: solid 1px #fff;
   width: 18%;
   text-align: center;
 }
 
 .title {
-  color: green;
-  left: 2%;
+  color: #fff;
+  padding-left: 2%;
+}
+
+.title:hover {
+  color: #fff;
+  opacity: 0.5;
+}
+
+.fa-arrow-circle-left {
+  position: absolute;
+  left: 15%;
+  top: 20%;
+}
+
+.forum-post-title {
+  padding-left: 18%;
+}
+
+.post-username {
+  width: 18%;
+  text-align: center;
+  float: left;
+  border-right: solid 1px #fff;
+  border-bottom: solid 1px #fff;
+  position: relative;
+  right: 2%;
 }
