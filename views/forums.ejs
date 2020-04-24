@@ -1,25 +1,31 @@
-
 <%- include("header"); -%>
+
 
 
 <section id="forums">
 
+
+
   <div class="container forum-post">
-  <% if (foundPosts && foundPosts.length>0) { %>
+    <% if (foundPosts && foundPosts.length>0) { %>
     <% foundPosts.forEach(post => { %>
-      <% const {username, title, body} = post %>
-        <div class="forum username">
-          <i><%=username.username%></i>
-        </div>
-         <div class="forum title">
+    <% const {username, title, body, _id} = post %>
+
+    <div class="forum username">
+      <i><%=username.username%></i>
+    </div>
+
+      <div class="forum title">
+        <a href=<%= "/forums/" + _id + "/"%>>
           <% if (title.length > 70 ){ %>
-           <%= title.substring(0, 71) %>...
-      <%   } else { %>
-           <%= title %>
-      <%   }  %>
-         </div>
-      <% }); %>
-  <% }; %>
+          (<%= title.substring(0, 71) %>...
+          <%  } else { %>
+          <%= title %>
+          <%  }  %>
+        </a>
+    </div>
+    <% }); %>
+    <% }; %>
     <form class="composeForm forum" action="/forums" method="post">
       <div class="form-group">
         <label>Title</label>
@@ -38,6 +44,7 @@
     <img class="background-img" src="images/classicrag.jpg" alt="">
   </div>
   <p class="credit">Crown © <%= year %></p>
+
 </section>
 
 

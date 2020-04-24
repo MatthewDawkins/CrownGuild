@@ -11,9 +11,11 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
+const _ = require('lodash');
 
 const app = express();
 
+app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -171,19 +173,18 @@ const Post = new mongoose.model("Post", forumsSchema);
 
 
 app.get("/forums", function(req, res){
-
-Post.find({}, function (err, foundPosts){
-  if (req.isAuthenticated()) {
-    res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postBody: req.body.postTitle});
-  } else {
-    res.redirect("/#join")
-  }
-}).populate("username");
-
+  Post.find({}, function (err, foundPosts){
+    if (req.isAuthenticated()) {
+      res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPosts._id});
+    } else {
+      res.redirect("/#join")
+    }
+  }).populate("username").sort('-date');
 });
 
 
 app.post("/forums", function(req, res) {
+
 
   const postUsername = req.user.id
   const postTitle = req.body.postTitle
@@ -205,39 +206,20 @@ app.post("/forums", function(req, res) {
 });
 
 
-app.get("/post/:title", function(req, res) {
-  const postBody = req.body.postBody
-  const {title} = req.params
+app.get("/forums/:postID", function(req, res) {
 
+    Post.find({}, function (err, foundPosts) {
+        res.render("forumposts", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPosts._id});
+    });
+  // const postTitle = req.params.postTitle;
+  // const postID = req.params.postID;
 
-  console.log(postBody);
-
-
-
-
-  Post.findOne({title: title}, function(err, foundPost){
-    if (!err){
-      if (!foundPost){
-        const post = new Post({
-          title: customPostName,
-          body: postBody
-      });
-
-      post.save();
-      } else {
-        res.render("")
-      }
-    }
-  })
-
-
-
-
-
-
-
-
+  // {foundPost: foundPost});
+  // Post.findOne({_id: postID}, function(err, foundPost) {
+  //
+  // })
 });
+
 
 
 
