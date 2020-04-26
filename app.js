@@ -164,8 +164,8 @@ const forumsSchema = new mongoose.Schema({
   comments: [{ body: String, date: Date }],
   date: { type: Date, default: Date.now },
   meta: {
-    upVotes: Number,
-    downVotes:  Number
+    upVotes: { type: Number, default: 0 },
+    downVotes: { type: Number, default: 0 }
     }
   });
 
@@ -174,6 +174,7 @@ const Post = new mongoose.model("Post", forumsSchema);
 
 app.get("/forums", function(req, res){
   Post.find({}, function (err, foundPosts){
+    console.log(foundPosts);
     if (req.isAuthenticated()) {
       res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPosts._id, upvotes: foundPosts.upVotes, downvotes: foundPosts.downVotes });
     } else {
@@ -212,8 +213,9 @@ app.get("/forums/:postID", function(req, res) {
   const postID = req.params.postID;
     Post.findOne({_id: postID}, function (err, foundPost) {
       if(!err){
-        res.render("forumposts", {username: foundPost.username.username, body: foundPost.body, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPost._id,  upvotes: foundPost.upVotes, downvotes: foundPost.downVotes});
+        res.render("forumposts", {username: foundPost.username.username, body: foundPost.body, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPost._id,  upvotes: foundPost.meta.upVotes, downvotes: foundPost.meta.downVotes});
       } else {
+        console.log(err);
         res.redirect("/forums")
       }
 }).populate("username");
