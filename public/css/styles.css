@@ -244,3 +244,25 @@ tr {
   position: relative;
   right: 2%;
 }
+
+.upvote {
+  position: absolute;
+  right: 50px;
+}
+
+.up-vote-count {
+  position: absolute;
+  right: 55px;
+  top: 0px;
+}
+
+.downvote {
+  position: absolute;
+  right: 10px;
+}
+
+.down-vote-count {
+  position: absolute;
+  right: 15px;
+  top: 0px;
+}

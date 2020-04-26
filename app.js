@@ -175,7 +175,7 @@ const Post = new mongoose.model("Post", forumsSchema);
 app.get("/forums", function(req, res){
   Post.find({}, function (err, foundPosts){
     if (req.isAuthenticated()) {
-      res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPosts._id, });
+      res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPosts._id, upvotes: foundPosts.upVotes, downvotes: foundPosts.downVotes });
     } else {
       res.redirect("/#join")
     }
@@ -193,7 +193,7 @@ app.post("/forums", function(req, res) {
   const post = new Post({
     username: postUsername,
     title: postTitle,
-    body: postBody
+    body: postBody,
   });
   Post.insertMany(post, function(err){
     if (err){
@@ -212,7 +212,7 @@ app.get("/forums/:postID", function(req, res) {
   const postID = req.params.postID;
     Post.findOne({_id: postID}, function (err, foundPost) {
       if(!err){
-        res.render("forumposts", {username: foundPost.username.username, body: foundPost.body, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPost._id});
+        res.render("forumposts", {username: foundPost.username.username, body: foundPost.body, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPost._id,  upvotes: foundPost.upVotes, downvotes: foundPost.downVotes});
       } else {
         res.redirect("/forums")
       }

@@ -15,6 +15,23 @@
 
     <div class="forum">
       <h3 class="forum-post-title"><%=title%></h3>
+      <div>
+        <% if (downvotes === 0) { %>
+          <p class="down-vote-count">0</p>
+        <%    } else { %>
+          <p class="down-vote-count"><%= downvotes %></p>
+        <% } %>
+
+        <i class="downvote far fa-thumbs-down"></i>
+      </div>
+      <div>
+        <% if (upvotes === 0) { %>
+        <p class="up-vote-count">0</p>
+        <%  } else { %>
+        <p class="up-vote-count"><%=upvotes %></p>
+        <%  } %>
+        <i class="upvote far fa-thumbs-up"></i>
+      </div>
     </div>
 
     <div class="forum">
@@ -22,6 +39,7 @@
         <i><%=username.username%><i>
       </div>
       <p><%=body%></p>
+
     </div>
 
     <form class="composeForm forum" action="/forums" method="post">

@@ -15,14 +15,31 @@
       <i><%=username.username%></i>
     </div>
 
-      <div class="forum title">
-        <a class="title" href=<%= "/forums/" + _id + "/"%>>
-          <% if (title.length > 70 ){ %>
-          <%= title.substring(0, 71) %>...
-          <%  } else { %>
-          <%= title %>
-          <%  }  %>
-        </a>
+    <div class="forum title">
+      <a class="title" href=<%= "/forums/" + _id + "/"%>>
+        <% if (title.length > 70 ){ %>
+        <%= title.substring(0, 71) %>...
+        <%  } else { %>
+        <%= title %>
+        <%  }  %>
+      </a>
+      <div>
+        <% if (downvotes === 0) { %>
+          <p class="down-vote-count">0</p>
+        <%    } else { %>
+          <p class="down-vote-count"><%= downvotes %></p>
+        <% } %>
+
+        <i class="downvote far fa-thumbs-down"></i>
+      </div>
+      <div>
+        <% if (upvotes === 0) { %>
+        <p class="up-vote-count">0</p>
+        <%  } else { %>
+        <p class="up-vote-count"><%=upvotes %></p>
+        <%  } %>
+        <i class="upvote far fa-thumbs-up"></i>
+      </div>
     </div>
     <% }); %>
     <% }; %>
