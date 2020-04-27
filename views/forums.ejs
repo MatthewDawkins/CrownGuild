@@ -23,23 +23,6 @@
         <%= title %>
         <%  }  %>
       </a>
-      <div>
-        <% if (downvotes === 0) { %>
-          <p class="down-vote-count">0</p>
-        <%    } else { %>
-          <p class="down-vote-count"><%= downvotes %></p>
-        <% } %>
-
-        <i class="downvote far fa-thumbs-down"></i>
-      </div>
-      <div>
-        <% if (upvotes === 0) { %>
-        <p class="up-vote-count">0</p>
-        <%  } else { %>
-        <p class="up-vote-count"><%=upvotes %></p>
-        <%  } %>
-        <i class="upvote far fa-thumbs-up"></i>
-      </div>
     </div>
     <% }); %>
     <% }; %>

@@ -11,44 +11,28 @@
 
     <div class="forum username">
       <i><%=username.username%><i>
+        <hr>
+          <% var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
+          <% var d = new Date(); %>
+          <% var dayName = days[d.getDay()]; %>
+          <p>Posted on: <%= dayName  %> <%=date.toLocaleTimeString();  %> <%= d.getFullYear(); %></p>
     </div>
 
     <div class="forum">
       <h3 class="forum-post-title"><%=title%></h3>
-      <div>
-        <% if (downvotes === 0) { %>
-          <p class="down-vote-count">0</p>
-        <%    } else { %>
-          <p class="down-vote-count"><%= downvotes %></p>
-        <% } %>
-
-        <i class="downvote far fa-thumbs-down"></i>
-      </div>
-      <div>
-        <% if (upvotes === 0) { %>
-        <p class="up-vote-count">0</p>
-        <%  } else { %>
-        <p class="up-vote-count"><%=upvotes %></p>
-        <%  } %>
-        <i class="upvote far fa-thumbs-up"></i>
-      </div>
+      <hr class="forum-title-hr">
+      <p class="post-body"><%=body%></p>
     </div>
 
-    <div class="forum">
-      <div class="post-username">
-        <i><%=username.username%><i>
-      </div>
-      <p><%=body%></p>
 
-    </div>
 
-    <form class="composeForm forum" action="/forums" method="post">
+    <form class="composeForm forum" action="/forums/<%=_id%>" method="post">
       <div class="form-group">
-        <label>Comment</label>
-        <textarea minlength="20" maxlength="2000" class="form-control" rows="5" name="postComment" placeholder="Compose your comment." required></textarea>
+        <br>
+        <textarea minlength="20" maxlength="2000" class="form-control" rows="5" name="postComment" placeholder="Add a comment." required></textarea>
       </div>
       <div class="form-group">
-        <button class="forum-button btn btn-outline-light" type="submit" name="button">Create Comment</button>
+        <button class="forum-button btn btn-outline-light" type="submit" name="button">Comment</button>
       </div>
     </form>
 
@@ -65,6 +49,8 @@
 
 
 
+
+<script src="/index.js" charset="UTF=8"></script>
 
 
 

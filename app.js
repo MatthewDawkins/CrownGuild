@@ -162,11 +162,7 @@ const forumsSchema = new mongoose.Schema({
   title: String,
   body: String,
   comments: [{ body: String, date: Date }],
-  date: { type: Date, default: Date.now },
-  meta: {
-    upVotes: { type: Number, default: 0 },
-    downVotes: { type: Number, default: 0 }
-    }
+  date: { type: Date, default: Date.now }
   });
 
 const Post = new mongoose.model("Post", forumsSchema);
@@ -174,9 +170,8 @@ const Post = new mongoose.model("Post", forumsSchema);
 
 app.get("/forums", function(req, res){
   Post.find({}, function (err, foundPosts){
-    console.log(foundPosts);
     if (req.isAuthenticated()) {
-      res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPosts._id, upvotes: foundPosts.upVotes, downvotes: foundPosts.downVotes });
+      res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPosts._id});
     } else {
       res.redirect("/#join")
     }
@@ -213,7 +208,7 @@ app.get("/forums/:postID", function(req, res) {
   const postID = req.params.postID;
     Post.findOne({_id: postID}, function (err, foundPost) {
       if(!err){
-        res.render("forumposts", {username: foundPost.username.username, body: foundPost.body, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPost._id,  upvotes: foundPost.meta.upVotes, downvotes: foundPost.meta.downVotes});
+        res.render("forumposts", {username: foundPost.username.username, body: foundPost.body, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPost._id});
       } else {
         console.log(err);
         res.redirect("/forums")
@@ -221,11 +216,25 @@ app.get("/forums/:postID", function(req, res) {
 }).populate("username");
 });
 
-
-
-
-
-
+// NEED TO FIX THIS AREA, CURRENTLY CREATES A NEW POST RATHER THAN A COMMENT INSIDE OF A CURRENT POST.
+// app.post("/forums/:postID", function(req, res){
+//
+//   const posterComment = req.body.postComment
+//   const postID = req.params.postID;
+//
+//   const postComment = new Post({
+//     comments: {body: posterComment}
+//   });
+//
+//   Post.insertMany(postComment, function(err){
+//     if (err){
+//       console.log(err);
+//     } else {
+//       postComment.save();
+//     }
+//   });
+//   res.redirect("/forums/:postID")
+// });
 
 
 app.get('/pvp', function(req, res){

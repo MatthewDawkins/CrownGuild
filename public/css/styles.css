@@ -231,8 +231,9 @@ tr {
   top: 20%;
 }
 
-.forum-post-title {
-  padding-left: 18%;
+.forum-post-title, .post-body {
+  text-align: center;
+  padding: 2%;
 }
 
 .post-username {
@@ -245,24 +246,7 @@ tr {
   right: 2%;
 }
 
-.upvote {
-  position: absolute;
-  right: 50px;
-}
-
-.up-vote-count {
-  position: absolute;
-  right: 55px;
-  top: 0px;
-}
-
-.downvote {
-  position: absolute;
-  right: 10px;
-}
-
-.down-vote-count {
-  position: absolute;
-  right: 15px;
-  top: 0px;
+.forum-title-hr {
+  width: 70%;
+  margin-left: 20%;
 }
