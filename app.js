@@ -208,11 +208,10 @@ app.get("/forums/:postID", function(req, res) {
   const postTitle = req.params.postTitle;
   const postID = req.params.postID;
     Post.findOne({_id: postID}, function (err, foundPost) {
-      if(!err){
+      if(req.isAuthenticated()){
         res.render("forumposts", {currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle});
       } else {
-        console.log(err);
-        res.redirect("/forums")
+        res.redirect("/#join")
       }
 }).populate("username");
 });
@@ -222,13 +221,13 @@ app.post("/forums/:postID", function(req, res){
   const commentUser = req.user.username;
   const posterComment = req.body.postComment;
   const postID = req.params.postID;
-  console.log(commentUser);
+
 
   Post.findOneAndUpdate({_id: postID}, {comments: {body: posterComment, username: commentUser}}, function(err, post){
     if (err){
       console.log(err);
     } else {
-      console.log(post);
+      post.save();
     }
   }).populate("comments");
   res.redirect("/forums/" + postID)
