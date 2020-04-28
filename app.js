@@ -33,6 +33,7 @@ mongoose.connect("mongodb://localhost:27017/crownUserDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+mongoose.set('useFindAndModify', false);
 mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema({
@@ -156,12 +157,12 @@ app.get("/logout", function(req, res){
 const forumsSchema = new mongoose.Schema({
   username: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'User'
   },
   date: Date,
   title: String,
   body: String,
-  comments: [{ body: String, date: Date }],
+  comments: [{body: String}, {username: {type: "ObjectIdAsString", ref: 'User'}}, {date: {type: Date, default: Date.now}}],
   date: { type: Date, default: Date.now }
   });
 
@@ -171,7 +172,7 @@ const Post = new mongoose.model("Post", forumsSchema);
 app.get("/forums", function(req, res){
   Post.find({}, function (err, foundPosts){
     if (req.isAuthenticated()) {
-      res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPosts._id});
+      res.render("forums", {currentUser: req.user, foundPosts: foundPosts, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle});
     } else {
       res.redirect("/#join")
     }
@@ -208,7 +209,7 @@ app.get("/forums/:postID", function(req, res) {
   const postID = req.params.postID;
     Post.findOne({_id: postID}, function (err, foundPost) {
       if(!err){
-        res.render("forumposts", {username: foundPost.username.username, body: foundPost.body, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle, postID: foundPost._id});
+        res.render("forumposts", {currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle});
       } else {
         console.log(err);
         res.redirect("/forums")
@@ -216,25 +217,22 @@ app.get("/forums/:postID", function(req, res) {
 }).populate("username");
 });
 
-// NEED TO FIX THIS AREA, CURRENTLY CREATES A NEW POST RATHER THAN A COMMENT INSIDE OF A CURRENT POST.
-// app.post("/forums/:postID", function(req, res){
-//
-//   const posterComment = req.body.postComment
-//   const postID = req.params.postID;
-//
-//   const postComment = new Post({
-//     comments: {body: posterComment}
-//   });
-//
-//   Post.insertMany(postComment, function(err){
-//     if (err){
-//       console.log(err);
-//     } else {
-//       postComment.save();
-//     }
-//   });
-//   res.redirect("/forums/:postID")
-// });
+// NEED TO FIX THIS AREA, CURRENTLY ISNT UPDATING USERNAME FIELD CORRECTLY .
+app.post("/forums/:postID", function(req, res){
+  const commentUser = req.user.username;
+  const posterComment = req.body.postComment;
+  const postID = req.params.postID;
+  console.log(commentUser);
+
+  Post.findOneAndUpdate({_id: postID}, {comments: {body: posterComment, username: commentUser}}, function(err, post){
+    if (err){
+      console.log(err);
+    } else {
+      console.log(post);
+    }
+  }).populate("comments");
+  res.redirect("/forums/" + postID)
+});
 
 
 app.get('/pvp', function(req, res){
