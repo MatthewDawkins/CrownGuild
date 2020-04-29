@@ -39,15 +39,15 @@
         <li class="nav-item navigation-bar-button"><a class="nav-link" href="/">Home</a></li>
         <li class="nav-item navigation-bar-button"><a class="nav-link" href="pvp">PvP</a></li>
         <li class="nav-item navigation-bar-button"><a class="nav-link" href="pve">PvE</a></li>
-      <% if (!currentUser){ %>
-        <li class="nav-item navigation-bar-button"><a class="nav-link" href="/#join">Login/SignUp</a></li>
-      <%  } else { %>
-        <li class="nav-item navigation-bar-button"><a class="nav-link" href="/logout">Logout</a></li>
-      <%  } %>
-      <% if (currentUser){ %>
-        <li class="nav-item navigation-bar-button"><a class="nav-link" href="/forums">Forums</a></li>
-      <% } else %>
         <li class="nav-item navigation-bar-button"><a class="nav-link" href="/#socials">Socials</a></li>
+        <% if (currentUser){ %>
+          <li class="nav-item navigation-bar-button"><a class="nav-link" href="/forums">Forums</a></li>
+        <% } else %>
+        <% if (!currentUser){ %>
+          <li class="nav-item navigation-bar-button"><a class="nav-link" href="/#join">Login/SignUp</a></li>
+        <%  } else { %>
+          <li class="nav-item navigation-bar-button"><a class="nav-link" href="/logout">Logout</a></li>
+        <%  } %>
       </ul>
     </div>
   </nav>

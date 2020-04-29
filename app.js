@@ -210,7 +210,6 @@ app.get("/forums/:postID", function(req, res) {
   const postTitle = req.params.postTitle;
   const postID = req.params.postID;
     Post.findOne({_id: postID}, function (err, foundPost) {
-      console.log(foundPost.comments);
       if(req.isAuthenticated()){
         res.render("forumposts", {postComments: foundPost.comments, posterComment: posterComment, commentUser: commentUser, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle});
       } else {
@@ -219,12 +218,11 @@ app.get("/forums/:postID", function(req, res) {
 }).populate("username");
 });
 
-// NEED TO FIX THIS AREA, CURRENTLY ISNT UPDATING USERNAME FIELD CORRECTLY .
+
 app.post("/forums/:postID", function(req, res){
   const commentUser = req.user.username;
   const posterComment = req.body.postComment;
   const postID = req.params.postID;
-  console.log(commentUser);
 
 
   Post.updateMany({_id: postID}, { $push: {comments: { body: posterComment, commentUsername: commentUser}}}, function(err, post){
