@@ -250,3 +250,11 @@ tr {
   width: 70%;
   margin-left: 20%;
 }
+
+.hide {
+  visibility: hidden;
+}
+.commentText {
+  width: 57%;
+  left: 20%;
+}

@@ -22,24 +22,30 @@
       <h3 class="forum-post-title"><%=title%></h3>
       <hr class="forum-title-hr">
       <p class="post-body"><%=body%></p>
-
     </div>
 
 
-    <% for(i=0;i<comments.length; i++) { %>
+<% for(i=0;i<comments.length; i++) { %>
 
+      <div class="forum username">
+          <i><%=postComments[i].commentUsername%></i>
+          <hr>
+          <p>Commented on: <%= postComments[i].date.toLocaleTimeString('default', { month: 'long'}); %> <%= postComments[i].date.getFullYear(); %> <%= days[postComments[i].date.getDay()]; %> </p>
+        </div>
       <div class="forum">
-        <p><%=postComments[i].commentUsername%></p>
-        <p><%=postComments[i].body%></p>
-        <p><%=postComments[i].date%></p>
+          <h3 class="forum-post-title hide">HIDE</h3>
+          <p class="post-body"><%=postComments[i].body%></p>
       </div>
+
+
+
     <% }; %>
+</div>
 
 
 
 
-
-    <form class="composeForm forum" action="/forums/<%=_id%>" method="post">
+    <form class="composeForm forum commentText" action="/forums/<%=_id%>" method="post">
       <div class="form-group">
         <br>
         <textarea minlength="20" maxlength="2000" class="form-control" rows="5" name="postComment" placeholder="Add a comment." required></textarea>
@@ -49,7 +55,6 @@
       </div>
     </form>
 
-  </div>
 
   <div>
     <img class="background-img" src="/images/classicrag.jpg" alt="">
