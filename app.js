@@ -162,7 +162,7 @@ const forumsSchema = new mongoose.Schema({
   date: Date,
   title: String,
   body: String,
-  comments: [{body: String}, {username: {type: "ObjectIdAsString", ref: 'User'}}, {date: {type: Date, default: Date.now}}],
+  comments: [{body: String, commentUsername: String, date: {type: Date, default: Date.now}}],
   date: { type: Date, default: Date.now }
   });
 
@@ -204,12 +204,15 @@ app.post("/forums", function(req, res) {
 
 
 app.get("/forums/:postID", function(req, res) {
+  const commentUser = req.user.username;
+  const posterComment = req.postComment
 
   const postTitle = req.params.postTitle;
   const postID = req.params.postID;
     Post.findOne({_id: postID}, function (err, foundPost) {
+      console.log(foundPost.comments);
       if(req.isAuthenticated()){
-        res.render("forumposts", {currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle});
+        res.render("forumposts", {postComments: foundPost.comments, posterComment: posterComment, commentUser: commentUser, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle});
       } else {
         res.redirect("/#join")
       }
@@ -221,15 +224,15 @@ app.post("/forums/:postID", function(req, res){
   const commentUser = req.user.username;
   const posterComment = req.body.postComment;
   const postID = req.params.postID;
+  console.log(commentUser);
 
 
-  Post.findOneAndUpdate({_id: postID}, {comments: {body: posterComment, username: commentUser}}, function(err, post){
-    if (err){
+  Post.updateMany({_id: postID}, { $push: {comments: { body: posterComment, commentUsername: commentUser}}}, function(err, post){
+    if (err) {
       console.log(err);
-    } else {
-      post.save();
     }
-  }).populate("comments");
+  }).populate("commentUsername");
+
   res.redirect("/forums/" + postID)
 });
 

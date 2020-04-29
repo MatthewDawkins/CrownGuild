@@ -1,6 +1,6 @@
 <%- include("header") -%>
 
-<% const {title, body, _id, date, username} = foundPost %>
+<% const {comments, title, body, _id, date, username} = foundPost %>
 
 
 <section id="forumPost">
@@ -22,7 +22,20 @@
       <h3 class="forum-post-title"><%=title%></h3>
       <hr class="forum-title-hr">
       <p class="post-body"><%=body%></p>
+
     </div>
+
+
+    <% for(i=0;i<comments.length; i++) { %>
+
+      <div class="forum">
+        <p><%=commentUser%></p>
+        <p><%=postComments[i].body%></p>
+        <p><%=postComments[i].date%></p>
+      </div>
+    <% }; %>
+
+
 
 
 
