@@ -211,7 +211,7 @@ app.get("/forums/:postID", function(req, res) {
   const postID = req.params.postID;
     Post.findOne({_id: postID}, function (err, foundPost) {
       if(req.isAuthenticated()){
-        res.render("forumposts", {postComments: foundPost.comments, posterComment: posterComment, commentUser: commentUser, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle});
+        res.render("forumposts", {postID: postID, postComments: foundPost.comments, posterComment: posterComment, commentUser: commentUser, currentUser: req.user, foundPost: foundPost, year: year, postBody: req.body.postBody, postTitle: req.body.postTitle});
       } else {
         res.redirect("/#join")
       }
@@ -233,6 +233,30 @@ app.post("/forums/:postID", function(req, res){
 
   res.redirect("/forums/" + postID)
 });
+
+
+
+
+
+//Get ahold of Post ID in  app.post("/delete"), or find out how to remove subdocuments by ID
+app.delete("/forums/:postID", function(req, res){
+
+  const button = req.body.button;
+  console.log(req.params.postID);
+
+
+  Post.update({_id: req.params.postID}, {pull: {comments: {_id: button}}}, function(err, callback){
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("worked");
+      res.redirect("back");
+    }
+
+});
+});
+
+
 
 
 app.get('/pvp', function(req, res){
