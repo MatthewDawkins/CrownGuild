@@ -257,7 +257,7 @@ app.post("/forums/:postID/delete", function(req, res){
     } else {
       console.log(foundPost);
       const newComments = foundPost.comments.filter(e => {
-        return (e._id != button)
+        return (e._id !== button)
       });
       Post.update({_id: postID}, {comments: newComments},function() {
           res.redirect("/forums/" + postID)
@@ -266,9 +266,14 @@ app.post("/forums/:postID/delete", function(req, res){
     });
 
 
+
+    // make below change into textarea
+
+
     // app.post("/forums/:postID/edit", function(req, res){
     //   let postID = req.params.postID
-    //   const newBody = req.body.editText;
+    //   const textButton = req.body.editText;
+    //   const newBody = req.body.   textarea;
     //   const button = req.body.button;
     //
     //   Post.findById({_id: postID}, function (err, foundPost) {
@@ -276,7 +281,7 @@ app.post("/forums/:postID/delete", function(req, res){
     //       console.log(err);
     //     } else {
     //       const newComments = foundPost.comments.map(e => {
-    //          if(e._id === button) {
+    //          if(e._id === textButton) {
     //               e.body = newBody
     //               e.date = date.now
     //          }

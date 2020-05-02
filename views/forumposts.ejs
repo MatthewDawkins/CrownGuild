@@ -40,7 +40,7 @@
             <button type="submit" name="button" value=<%=postComments[i]._id%>><i class="fa fa-trash" aria-hidden="true"></i></button>
           </form>
           <form class="inline" method="post" action=<%="/forums/" + _id + "/edit"%>>
-            <button type="submit" name="editText" value=<%=postComments[i]._id%>><i class="fas fa-edit" aria-hidden="true"></i></button>
+            <button type="submit" name="editButton" value=<%=postComments[i]._id%>><i class="fas fa-edit" aria-hidden="true"></i></button>
           </form>
       <%  }; %>
       </div>
