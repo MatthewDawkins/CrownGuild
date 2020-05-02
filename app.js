@@ -255,9 +255,8 @@ app.post("/forums/:postID/delete", function(req, res){
     if (err) {
       console.log(err);
     } else {
-      console.log(foundPost);
       const newComments = foundPost.comments.filter(e => {
-        return (e._id !== button)
+        return (e._id != button)
       });
       Post.update({_id: postID}, {comments: newComments},function() {
           res.redirect("/forums/" + postID)
