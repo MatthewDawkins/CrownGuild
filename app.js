@@ -143,7 +143,7 @@ app.get('/', function(req, res){
 
 
 app.get("/logout", function(req, res){
-  req.session.destroy(function(err){
+  req.session.destroy(err => {
       if(err){
           console.log(err);
         } else {
@@ -238,23 +238,58 @@ app.post("/forums/:postID", function(req, res){
 
 
 
-//Get ahold of Post ID in  app.post("/delete"), or find out how to remove subdocuments by ID
-app.delete("/forums/:postID", function(req, res){
+
+
+
+
+
+
+
+
+app.post("/forums/:postID/delete", function(req, res){
+  let postID = req.params.postID
 
   const button = req.body.button;
-  console.log(req.params.postID);
 
-
-  Post.update({_id: req.params.postID}, {pull: {comments: {_id: button}}}, function(err, callback){
+  Post.findById({_id: postID}, function (err, foundPost) {
     if (err) {
       console.log(err);
     } else {
-      console.log("worked");
-      res.redirect("back");
-    }
+      console.log(foundPost);
+      const newComments = foundPost.comments.filter(e => {
+        return (e._id != button)
+      });
+      Post.update({_id: postID}, {comments: newComments},function() {
+          res.redirect("/forums/" + postID)
+        });
+      }});
+    });
 
-});
-});
+
+    // app.post("/forums/:postID/edit", function(req, res){
+    //   let postID = req.params.postID
+    //   const newBody = req.body.editText;
+    //   const button = req.body.button;
+    //
+    //   Post.findById({_id: postID}, function (err, foundPost) {
+    //     if (err) {
+    //       console.log(err);
+    //     } else {
+    //       const newComments = foundPost.comments.map(e => {
+    //          if(e._id === button) {
+    //               e.body = newBody
+    //               e.date = date.now
+    //          }
+    //         return e
+    //       })
+    //       Post.findByIdAndUpdate({_id: postID}, {comments: newComments}, function (err, foundPost) {
+    //         if (err) {
+    //           console.log(err);
+    //         } else {
+    //           res.redirect("/forums/" + postID)
+    //         }});
+    //       }});
+    //     });
 
 
 
