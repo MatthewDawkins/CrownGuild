@@ -36,11 +36,8 @@
           <h3 class="forum-post-title hide">HIDE</h3>
           <p class="post-body"><%=postComments[i].body%></p>
           <% if (currentUser.username === postComments[i].commentUsername){ %>
-          <form class="inline" method="post" action=<%="/forums/" + _id + "/delete"%>>
+          <form class="" method="post" action=<%="/forums/" + _id + "/delete"%>>
             <button type="submit" name="button" value=<%=postComments[i]._id%>><i class="fa fa-trash" aria-hidden="true"></i></button>
-          </form>
-          <form class="inline" method="post" action=<%="/forums/" + _id + "/edit"%>>
-            <button type="submit" name="editButton" value=<%=postComments[i]._id%>><i class="fas fa-edit" aria-hidden="true"></i></button>
           </form>
       <%  }; %>
       </div>

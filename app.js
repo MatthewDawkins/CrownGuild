@@ -258,42 +258,11 @@ app.post("/forums/:postID/delete", function(req, res){
       const newComments = foundPost.comments.filter(e => {
         return (e._id != button)
       });
-      Post.update({_id: postID}, {comments: newComments},function() {
+      Post.updateOne({_id: postID}, {comments: newComments},function() {
           res.redirect("/forums/" + postID)
         });
       }});
     });
-
-
-
-    // make below change into textarea
-
-
-    // app.post("/forums/:postID/edit", function(req, res){
-    //   let postID = req.params.postID
-    //   const textButton = req.body.editText;
-    //   const newBody = req.body.   textarea;
-    //   const button = req.body.button;
-    //
-    //   Post.findById({_id: postID}, function (err, foundPost) {
-    //     if (err) {
-    //       console.log(err);
-    //     } else {
-    //       const newComments = foundPost.comments.map(e => {
-    //          if(e._id === textButton) {
-    //               e.body = newBody
-    //               e.date = date.now
-    //          }
-    //         return e
-    //       })
-    //       Post.findByIdAndUpdate({_id: postID}, {comments: newComments}, function (err, foundPost) {
-    //         if (err) {
-    //           console.log(err);
-    //         } else {
-    //           res.redirect("/forums/" + postID)
-    //         }});
-    //       }});
-    //     });
 
 
 
