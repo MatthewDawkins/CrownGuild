@@ -15,7 +15,8 @@
           <% var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
           <% var d = new Date(); %>
           <% var dayName = days[d.getDay()]; %>
-          <p>Posted on: <%=date%></p>
+          <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
+          <p>Posted on: <%= months[date.getMonth()]; %> <%=date.getDate()%>, <%= d.getFullYear();%>, <%=days[date.getDay()]%> <%=date.toLocaleTimeString();  %></p>
     </div>
 
     <div class="forum">
@@ -30,7 +31,7 @@
       <div class="forum username">
           <i><%=postComments[i].commentUsername%></i>
           <hr>
-          <p>Commented on: <%=date%></p>
+          <p>Commented on: <%= months[postComments[i].date.getMonth()] %> <%=postComments[i].date.getDate()%>, <%= postComments[i].date.getFullYear(); %>, <%= days[postComments[i].date.getDay()];%>, <%=postComments[i].date.toLocaleTimeString()%></p>
         </div>
       <div class="forum">
           <h3 class="forum-post-title hide">HIDE</h3>
