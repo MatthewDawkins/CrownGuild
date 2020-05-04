@@ -1,12 +1,10 @@
 <%- include("header"); -%>
 
-
-
 <section id="forums">
 
-
-
   <div class="container forum-post">
+
+    <!-- Forum posts -->
     <% if (foundPosts && foundPosts.length>0) { %>
     <% foundPosts.forEach(post => { %>
     <% const {username, title, body, _id} = post %>
@@ -26,6 +24,8 @@
     </div>
     <% }); %>
     <% }; %>
+
+    <!-- Create forum post area -->
     <form class="composeForm forum" action="/forums" method="post">
       <div class="form-group">
         <label>Title</label>
@@ -39,15 +39,17 @@
         <button class="forum-button btn btn-outline-light" type="submit" name="button">Create Post</button>
       </div>
     </form>
+
   </div>
+
+  <!-- Background image -->
   <div>
     <img class="background-img" src="images/classicrag.jpg" alt="">
   </div>
+
+  <!-- Crown credits -->
   <p class="credit">Crown © <%= year %></p>
 
 </section>
-
-
-
 
 <%- include("footer"); -%>

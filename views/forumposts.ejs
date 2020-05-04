@@ -2,16 +2,19 @@
 
 <% const {comments, title, body, _id, date, username} = foundPost %>
 
-
 <section id="forumPost">
 
+
+  <!-- Back arrow -->
   <a href="/forums" class="fa fa-arrow-circle-left" style="font-size:48px;color:white"></a>
 
+  <!-- Original post -->
   <div class="container forum-post">
 
+    <!-- OP Username box -->
     <div class="forum username">
       <i><%=username.username%><i>
-        <hr>
+          <hr>
           <% var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
           <% var d = new Date(); %>
           <% var dayName = days[d.getDay()]; %>
@@ -19,64 +22,52 @@
           <p>Posted on: <%= months[date.getMonth()]; %> <%=date.getDate()%>, <%= d.getFullYear();%>, <%=days[date.getDay()]%> <%=date.toLocaleTimeString();  %></p>
     </div>
 
+    <!-- OP Title & Content -->
     <div class="forum">
       <h3 class="forum-post-title"><%=title%></h3>
       <hr class="forum-title-hr">
       <p class="post-body"><%=body%></p>
     </div>
 
-
-<% for(i=0;i<comments.length; i++) { %>
-
-      <div class="forum username">
-          <i><%=postComments[i].commentUsername%></i>
-          <hr>
-          <p>Commented on: <%= months[postComments[i].date.getMonth()] %> <%=postComments[i].date.getDate()%>, <%= postComments[i].date.getFullYear(); %>, <%= days[postComments[i].date.getDay()];%>, <%=postComments[i].date.toLocaleTimeString()%></p>
-        </div>
-      <div class="forum">
-          <h3 class="forum-post-title hide">HIDE</h3>
-          <p class="post-body"><%=postComments[i].body%></p>
-          <% if (currentUser.username === postComments[i].commentUsername){ %>
-          <form class="delete-button" method="post" action=<%="/forums/" + _id + "/delete"%>>
-            <button type="submit" name="button" value=<%=postComments[i]._id%>><i class="fa fa-trash" aria-hidden="true"></i></button>
-          </form>
+    <!-- Post comments -->
+    <% for(i=0;i<comments.length; i++) { %>
+    <div class="forum username">
+      <i><%=postComments[i].commentUsername%></i>
+      <hr>
+      <p>Commented on: <%= months[postComments[i].date.getMonth()] %> <%=postComments[i].date.getDate()%>, <%= postComments[i].date.getFullYear(); %>, <%= days[postComments[i].date.getDay()];%>, <%=postComments[i].date.toLocaleTimeString()%></p>
+    </div>
+    <div class="forum">
+      <h3 class="forum-post-title hide">HIDE</h3>
+      <p class="post-body"><%=postComments[i].body%></p>
+      <% if (currentUser.username === postComments[i].commentUsername){ %>
+      <form class="delete-button" method="post" action=<%="/forums/" + _id + "/delete"%>>
+        <button type="submit" name="button" value=<%=postComments[i]._id%>><i class="fa fa-trash" aria-hidden="true"></i></button>
+      </form>
       <%  }; %>
-      </div>
-
-
-
+    </div>
     <% }; %>
-</div>
 
+  </div>
 
+  <!-- Add comments box -->
+  <form class="composeForm forum commentText" action="/forums/<%=_id%>" method="post">
+    <div class="form-group">
+      <br>
+      <textarea minlength="20" maxlength="2000" class="form-control" rows="5" name="postComment" placeholder="Add a comment." required></textarea>
+    </div>
+    <div class="form-group">
+      <button class="forum-button btn btn-outline-light" type="submit">Comment</button>
+    </div>
+  </form>
 
-
-    <form class="composeForm forum commentText" action="/forums/<%=_id%>" method="post">
-      <div class="form-group">
-        <br>
-        <textarea minlength="20" maxlength="2000" class="form-control" rows="5" name="postComment" placeholder="Add a comment." required></textarea>
-      </div>
-      <div class="form-group">
-        <button class="forum-button btn btn-outline-light" type="submit">Comment</button>
-      </div>
-    </form>
-
-
+  <!-- Background image -->
   <div>
     <img class="background-img" src="/images/classicrag.jpg" alt="">
   </div>
 
+  <!-- Crown credits -->
   <p class="credit">Crown © <%= year %></p>
 
 </section>
-
-
-
-
-
-<script src="/index.js" charset="UTF=8"></script>
-
-
-
 
 <%- include("footer") -%>

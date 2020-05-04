@@ -16,7 +16,7 @@ h3 {
   padding-bottom: 3%;
 }
 
-/* NAVBAR  */
+/* Navbar  */
 
 .navigation-bar-button {
   padding: 0 5%;
@@ -26,7 +26,7 @@ h3 {
   color: #fff;
 }
 
-/* home */
+/* Home Page */
 
 #home {
   text-align: center;
@@ -66,7 +66,7 @@ h3 {
   position: fixed;
 }
 
-/* JOIN NOW SECTION */
+/* Sign Up Section */
 
 #join {
   padding: 8% 15%;
@@ -79,16 +79,11 @@ h3 {
   border: none;
 }
 
-.login-label {
-  color: #ededed;
-}
-
 .social-block {
-  color: #ededed;
   margin-top: 40%;
 }
 
-/* SOCIALS SECTION */
+/* Socials Section */
 
 #socials {
   text-align: center;
@@ -114,7 +109,7 @@ h3 {
   margin-bottom: 0;
 }
 
-/* PVP SECTION */
+/* PvP Section */
 
 #pvp-carousel {
   padding: 10% 0 0;
@@ -134,23 +129,14 @@ h3 {
 }
 
 
-/* PVE SECTION */
+/* PvE Section */
 
 tr {
   border: 1px solid #ededed;
 }
 
-.pve {
-  min-width: 100vw;
-  min-height: 100vh;
-}
-
 .parse-data {
   background-color: transparent;
-  color: #ededed;
-}
-
-.iuxbp-parse-table {
   color: #ededed;
 }
 
@@ -167,7 +153,6 @@ tr {
 
 .rank-img {
   opacity: 0.5;
-
 }
 
 .pve-headings {
@@ -181,7 +166,7 @@ tr {
   top: 7%;
 }
 
-/* FORUM SECTION */
+/* Forum Section */
 
 #forums {
   letter-spacing: 2px;
@@ -254,6 +239,7 @@ tr {
 .hide {
   visibility: hidden;
 }
+
 .commentText {
   width: 57%;
   left: 20%;
