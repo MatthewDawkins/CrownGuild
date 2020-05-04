@@ -261,3 +261,11 @@ tr {
 .inline {
   display: inline;
 }
+
+.delete-button {
+  position: absolute;
+  display: inline;
+  float: right;
+  top: 7%;
+  right: 2%;
+}

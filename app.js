@@ -267,191 +267,191 @@ app.post("/forums/:postID/delete", function(req, res){
 
 
 
-app.get('/pvp', function(req, res){
-  res.render("pvp", {currentUser: req.user, year: year});
-});
-
-app.get('/pve', function(req, res){
-
-  const url = "https://classic.warcraftlogs.com:443/v1/parses/character/iuxbp/fairbanks/us?metric=dps&timeframe=historical&api_key=" + process.env.API_KEY;
-
-  https.get(url, function(response){
-
-  var body = "";
-
-    response.on("data", function(data) {
-      body += data
+    app.get('/pvp', function(req, res){
+      res.render("pvp", {currentUser: req.user, year: year});
     });
 
-    response.on("end", function(){
-      const logs = JSON.parse(body);
+    app.get('/pve', function(req, res){
 
-      // RAZORGORE SECTION
+      const url = "https://classic.warcraftlogs.com:443/v1/parses/character/iuxbp/fairbanks/us?metric=dps&timeframe=historical&api_key=" + process.env.API_KEY;
 
-      const razorgoreRanks = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 610){
-          razorgoreRanks.push(logs[i].rank)
-        }
-      }
-      var recordRazorgoreRank = Math.min(...razorgoreRanks);
+      https.get(url, function(response){
 
-      const razorgorePercentiles = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 610){
-          razorgorePercentiles.push(logs[i].percentile)
-        }
-      }
-      var recordRazorgorePercentile = Math.floor(Math.max(...razorgorePercentiles));
+      var body = "";
 
-      // VAEL SECTION
+        response.on("data", function(data) {
+          body += data
+        });
 
-      const vaelRanks = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 611){
-          vaelRanks.push(logs[i].rank)
-        }
-      }
-      var recordVaelRank = Math.min(...vaelRanks);
+        response.on("end", function(){
+          const logs = JSON.parse(body);
 
-      const vaelPercentiles = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 611){
-          vaelPercentiles.push(logs[i].percentile)
-        }
-      }
-      var recordVaelPercentile = Math.floor(Math.max(...vaelPercentiles));
+          // RAZORGORE SECTION
 
-      // BROODLORD SECTION
+          const razorgoreRanks = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 610){
+              razorgoreRanks.push(logs[i].rank)
+            }
+          }
+          var recordRazorgoreRank = Math.min(...razorgoreRanks);
 
-      const broodlordRanks = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 612){
-          broodlordRanks.push(logs[i].rank)
-        }
-      }
-      var recordBroodlordRank = Math.min(...broodlordRanks);
+          const razorgorePercentiles = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 610){
+              razorgorePercentiles.push(logs[i].percentile)
+            }
+          }
+          var recordRazorgorePercentile = Math.floor(Math.max(...razorgorePercentiles));
 
-      const broodlordPercentiles = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 612){
-          broodlordPercentiles.push(logs[i].percentile)
-        }
-      }
-      var recordBroodlordPercentile = Math.floor(Math.max(...broodlordPercentiles));
+          // VAEL SECTION
 
-      // FIREMAW SECTION
+          const vaelRanks = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 611){
+              vaelRanks.push(logs[i].rank)
+            }
+          }
+          var recordVaelRank = Math.min(...vaelRanks);
 
-      const firemawRanks = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 613){
-          firemawRanks.push(logs[i].rank)
-        }
-      }
-      var recordFiremawRank = Math.min(...firemawRanks);
+          const vaelPercentiles = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 611){
+              vaelPercentiles.push(logs[i].percentile)
+            }
+          }
+          var recordVaelPercentile = Math.floor(Math.max(...vaelPercentiles));
 
-      const firemawPercentiles = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 613){
-          firemawPercentiles.push(logs[i].percentile)
-        }
-      }
-      var recordFiremawPercentile = Math.floor(Math.max(...firemawPercentiles));
+          // BROODLORD SECTION
 
-      // EBONROC SECTION
+          const broodlordRanks = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 612){
+              broodlordRanks.push(logs[i].rank)
+            }
+          }
+          var recordBroodlordRank = Math.min(...broodlordRanks);
 
-      const ebonrocRanks = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 614){
-          ebonrocRanks.push(logs[i].rank)
-        }
-      }
-      var recordEbonrocRank = Math.min(...ebonrocRanks);
+          const broodlordPercentiles = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 612){
+              broodlordPercentiles.push(logs[i].percentile)
+            }
+          }
+          var recordBroodlordPercentile = Math.floor(Math.max(...broodlordPercentiles));
 
-      const ebonrocPercentiles = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 614){
-          ebonrocPercentiles.push(logs[i].percentile)
-        }
-      }
-      var recordEbonrocPercentile = Math.floor(Math.max(...ebonrocPercentiles));
+          // FIREMAW SECTION
 
-      // FLAMEGOR SECTION
+          const firemawRanks = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 613){
+              firemawRanks.push(logs[i].rank)
+            }
+          }
+          var recordFiremawRank = Math.min(...firemawRanks);
 
-      const flamegorRanks = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 615){
-          flamegorRanks.push(logs[i].rank)
-        }
-      }
-      var recordFlamegorRank = Math.min(...flamegorRanks);
+          const firemawPercentiles = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 613){
+              firemawPercentiles.push(logs[i].percentile)
+            }
+          }
+          var recordFiremawPercentile = Math.floor(Math.max(...firemawPercentiles));
 
-      const flamegorPercentiles = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 615){
-          flamegorPercentiles.push(logs[i].percentile)
-        }
-      }
-      var recordFlamegorPercentile = Math.floor(Math.max(...flamegorPercentiles));
+          // EBONROC SECTION
 
-      // CHROMAGGUS SECTION
+          const ebonrocRanks = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 614){
+              ebonrocRanks.push(logs[i].rank)
+            }
+          }
+          var recordEbonrocRank = Math.min(...ebonrocRanks);
 
-      const chromaggusRanks = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 616){
-          chromaggusRanks.push(logs[i].rank)
-        }
-      }
-      var recordChromaggusRank = Math.min(...chromaggusRanks);
+          const ebonrocPercentiles = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 614){
+              ebonrocPercentiles.push(logs[i].percentile)
+            }
+          }
+          var recordEbonrocPercentile = Math.floor(Math.max(...ebonrocPercentiles));
 
-      const chromaggusPercentiles = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 616){
-          chromaggusPercentiles.push(logs[i].percentile)
-        }
-      }
-      var recordChromaggusPercentile = Math.floor(Math.max(...chromaggusPercentiles));
+          // FLAMEGOR SECTION
 
-      // NEFARION SECTION
+          const flamegorRanks = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 615){
+              flamegorRanks.push(logs[i].rank)
+            }
+          }
+          var recordFlamegorRank = Math.min(...flamegorRanks);
 
-      const nefRanks = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 617){
-          nefRanks.push(logs[i].rank)
-        }
-      }
-      var recordNefRank = Math.min(...nefRanks);
+          const flamegorPercentiles = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 615){
+              flamegorPercentiles.push(logs[i].percentile)
+            }
+          }
+          var recordFlamegorPercentile = Math.floor(Math.max(...flamegorPercentiles));
 
-      const nefPercentiles = [];
-      for (var i = 0; i < logs.length; i++) {
-        if (logs[i].encounterID === 617){
-          nefPercentiles.push(logs[i].percentile)
-        }
-      }
-      var recordNefPercentile = Math.floor(Math.max(...nefPercentiles));
+          // CHROMAGGUS SECTION
 
-      res.render("pve", {
-        recordRazorgoreRank: recordRazorgoreRank,
-        recordRazorgorePercentile: recordRazorgorePercentile,
-        recordVaelRank: recordVaelRank,
-        recordVaelPercentile: recordVaelPercentile,
-        recordBroodlordRank: recordBroodlordRank,
-        recordBroodlordPercentile: recordBroodlordPercentile,
-        recordFiremawRank: recordFiremawRank,
-        recordFiremawPercentile: recordFiremawPercentile,
-        recordEbonrocRank: recordEbonrocRank,
-        recordEbonrocPercentile: recordEbonrocPercentile,
-        recordFlamegorRank: recordFlamegorRank,
-        recordFlamegorPercentile: recordFlamegorPercentile,
-        recordChromaggusRank: recordChromaggusRank,
-        recordChromaggusPercentile: recordChromaggusPercentile,
-        recordNefRank: recordNefRank,
-        recordNefPercentile: recordNefPercentile,
-        currentUser: req.user
+          const chromaggusRanks = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 616){
+              chromaggusRanks.push(logs[i].rank)
+            }
+          }
+          var recordChromaggusRank = Math.min(...chromaggusRanks);
+
+          const chromaggusPercentiles = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 616){
+              chromaggusPercentiles.push(logs[i].percentile)
+            }
+          }
+          var recordChromaggusPercentile = Math.floor(Math.max(...chromaggusPercentiles));
+
+          // NEFARION SECTION
+
+          const nefRanks = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 617){
+              nefRanks.push(logs[i].rank)
+            }
+          }
+          var recordNefRank = Math.min(...nefRanks);
+
+          const nefPercentiles = [];
+          for (var i = 0; i < logs.length; i++) {
+            if (logs[i].encounterID === 617){
+              nefPercentiles.push(logs[i].percentile)
+            }
+          }
+          var recordNefPercentile = Math.floor(Math.max(...nefPercentiles));
+
+          res.render("pve", {
+            recordRazorgoreRank: recordRazorgoreRank,
+            recordRazorgorePercentile: recordRazorgorePercentile,
+            recordVaelRank: recordVaelRank,
+            recordVaelPercentile: recordVaelPercentile,
+            recordBroodlordRank: recordBroodlordRank,
+            recordBroodlordPercentile: recordBroodlordPercentile,
+            recordFiremawRank: recordFiremawRank,
+            recordFiremawPercentile: recordFiremawPercentile,
+            recordEbonrocRank: recordEbonrocRank,
+            recordEbonrocPercentile: recordEbonrocPercentile,
+            recordFlamegorRank: recordFlamegorRank,
+            recordFlamegorPercentile: recordFlamegorPercentile,
+            recordChromaggusRank: recordChromaggusRank,
+            recordChromaggusPercentile: recordChromaggusPercentile,
+            recordNefRank: recordNefRank,
+            recordNefPercentile: recordNefPercentile,
+            currentUser: req.user
+          });
+        });
       });
     });
-  });
-});
 
 app.post("/signup", function(req, res) {
 
