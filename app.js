@@ -7,9 +7,9 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
-const TwitterStrategy = require('passport-twitter').Strategy;
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+// const FacebookStrategy = require('passport-facebook').Strategy;
+// const TwitterStrategy = require('passport-twitter').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 const _ = require('lodash');
 
@@ -71,87 +71,87 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-// Google OAuth strategy
-passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/crown",
-    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({
-      googleId: profile.id
-    }, function(err, user) {
-      return cb(err, user);
-    });
-  }
-));
+//                        Google OAuth strategy
+// passport.use(new GoogleStrategy({
+//     clientID: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRET,
+//     callbackURL: "http://localhost:3000/auth/google/crown",
+//     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+//   },
+//   function(accessToken, refreshToken, profile, cb) {
+//     User.findOrCreate({
+//       googleId: profile.id
+//     }, function(err, user) {
+//       return cb(err, user);
+//     });
+//   }
+// ));
 
-// Facebook OAuth strategy
-passport.use(new FacebookStrategy({
-    clientID: process.env.APP_ID,
-    clientSecret: process.env.APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/crown"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({
-      facebookId: profile.id
-    }, function(err, user) {
-      return cb(err, user);
-    });
-  }
-));
+//                        Facebook OAuth strategy
+// passport.use(new FacebookStrategy({
+//     clientID: process.env.APP_ID,
+//     clientSecret: process.env.APP_SECRET,
+//     callbackURL: "http://localhost:3000/auth/facebook/crown"
+//   },
+//   function(accessToken, refreshToken, profile, cb) {
+//     User.findOrCreate({
+//       facebookId: profile.id
+//     }, function(err, user) {
+//       return cb(err, user);
+//     });
+//   }
+// ));
 
-// Twitter OAuth strategy
-passport.use(new TwitterStrategy({
-    consumerKey: process.env.CONSUMER_ID,
-    consumerSecret: process.env.CONSUMER_SECRET,
-    callbackURL: "http://localhost:3000/auth/twitter/crown"
-  },
-  function(token, tokenSecret, profile, cb) {
-    User.findOrCreate({
-      twitterId: profile.id
-    }, function(err, user) {
-      return cb(err, user);
-    });
-  }
-));
+//                        Twitter OAuth strategy
+// passport.use(new TwitterStrategy({
+//     consumerKey: process.env.CONSUMER_ID,
+//     consumerSecret: process.env.CONSUMER_SECRET,
+//     callbackURL: "http://localhost:3000/auth/twitter/crown"
+//   },
+//   function(token, tokenSecret, profile, cb) {
+//     User.findOrCreate({
+//       twitterId: profile.id
+//     }, function(err, user) {
+//       return cb(err, user);
+//     });
+//   }
+// ));
 
-// Google OAuth
-app.get("/auth/google", passport.authenticate('google', {
-  scope: ["profile"]
-}));
-
-app.get("/auth/google/crown",
-  passport.authenticate('google', {
-    failureRedirect: '/'
-  }),
-  function(req, res) {
+//                        Google OAuth
+// app.get("/auth/google", passport.authenticate('google', {
+//   scope: ["profile"]
+// }));
+//
+// app.get("/auth/google/crown",
+//   passport.authenticate('google', {
+//     failureRedirect: '/'
+//   }),
+//   function(req, res) {
     // Successful authentication, redirect secrets.
-    res.redirect('/');
-  });
+  //   res.redirect('/');
+  // });
 
-// Facebook OAuth
-app.get('/auth/facebook', passport.authenticate('facebook'));
+//                        Facebook OAuth
+// app.get('/auth/facebook', passport.authenticate('facebook'));
+//
+// app.get('/auth/facebook/crown',
+//   passport.authenticate('facebook', {
+//     successRedirect: '/',
+//     failureRedirect: '/'
+//   }));
 
-app.get('/auth/facebook/crown',
-  passport.authenticate('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/'
-  }));
-
-// Twitter OAuth
-app.get('/auth/twitter',
-  passport.authenticate('twitter'));
-
-app.get('/auth/twitter/crown',
-  passport.authenticate('twitter', {
-    failureRedirect: '/'
-  }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+//                        Twitter OAuth
+// app.get('/auth/twitter',
+//   passport.authenticate('twitter'));
+//
+// app.get('/auth/twitter/crown',
+//   passport.authenticate('twitter', {
+//     failureRedirect: '/'
+//   }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   });
 
 // Current date to use in ejs pages
 const d = new Date();
