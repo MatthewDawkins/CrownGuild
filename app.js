@@ -33,7 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Connect to MongoDB Database
-mongoose.connect("mongodb://localhost:27017/crownUserDB", {
+mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
